@@ -6,12 +6,6 @@ f = f_in.read()
 utf = ""
 f_out = open("utf8encoder_out.txt" , 'wb')
 for i in xrange(0,len(f),2):
-	#print "character: "+f[i]+f[i+1]
-	#print ord(f[i])
-	#print ord(f[i+1])
-	#print hex(ord(f[i]))
-	#print hex(ord(f[i+1]))
-	#print ord(f[i])+ord(f[i+1])
 	hexv1 = hex(ord(f[i]))[2:]
 	hexv2 = hex(ord(f[i+1]))[2:]
 	if(len(hexv1)<2):
@@ -21,13 +15,7 @@ for i in xrange(0,len(f),2):
 		for i in range(0,2-len(hexv2)):
 			hexv2='0'+hexv2
 	
-	#print "hex value:"+"0x"+hex(ord(f[i]))[2:][::-1]
-	#if(len(hex(ord(f[i]))[2:])<=2):
-	#hexv = "0x"+hex(ord(f[i]))[2:]+hex(ord(f[i+1]))[2:]
 	hexv = '0x'+hexv1+hexv2
-	#else:
-	#	hexv = "0x"+hex(ord(f[i]))[2:][::-1]
-	#print "Hex-value: "+hexv
 	if(int(hexv,16) <= 0x7F):
 		#print "one octet"
 		#print "Converted to utf"
@@ -66,7 +54,6 @@ for i in xrange(0,len(f),2):
 		bitstr = bin(int(hexv,16))[2:]
 		#print bitstr
 		length = len(bitstr)
-		#print "length is"+str(length)
 		thirdoctet = bitstr[length-6:length]
 		if(len(thirdoctet)<6):
 			for l in range(0,6-len(thirdoctet)):
@@ -96,21 +83,7 @@ for i in xrange(0,len(f),2):
 		f_out.write(BitArray('0b'+completeoctet).tobytes())
 	
 		
-#print "-----------------" 
-#print utf
 
-#f_out = open("output.txt" , 'w')
-#f_out.write(utf)
 f_in.close()
 f_out.close()
 
-# print ord('A')
-# print hex(ord('A'))
-#	print bin(65)
-# print bin(int('0x41',16))
-# print chr(65)
-
-#print repr(f)
-#print f.encode('hex')
-#print type(f)
-#print f[:10]
